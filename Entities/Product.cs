@@ -15,6 +15,6 @@ namespace dotnet_hero.Entities
         public DateTime Created { get; set; }
         public int CategoryId { get; set; }
 
-        internal virtual Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }
