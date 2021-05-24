@@ -63,6 +63,8 @@ namespace dotnet_hero.Controllers
         [HttpPost]
         public async Task<ActionResult> AddProduct([FromForm] ProductRequest productRequest)
         {
+            (string errorMessage, string imageName) = await productService.UploadImage(productRequest.FormFile);
+            if (!string.IsNullOrEmpty(errorMessage)) return BadRequest();
 
             //var product = new Product
             //{
@@ -71,6 +73,8 @@ namespace dotnet_hero.Controllers
 
             //mapster
             var product = productRequest.Adapt<Product>();
+
+            product.Image = imageName;
 
             await productService.Create(product);
 
@@ -85,12 +89,21 @@ namespace dotnet_hero.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateProduct(int id, [FromForm] ProductRequest productRequest)
         {
+
             //if (id != productRequest.ProductId) return BadRequest();
 
             //var result = databaseContext.Products.Find(id);
             var product = await productService.FindOne(id);
 
             if (product == null) return NotFound();
+
+            (string errorMessage, string imageName) = await productService.UploadImage(productRequest.FormFile);
+            if (!string.IsNullOrEmpty(errorMessage)) return BadRequest();
+
+            if (!string.IsNullOrEmpty(imageName))
+            {
+                product.Image = imageName;
+            }
 
             //mapser
             productRequest.Adapt(product);

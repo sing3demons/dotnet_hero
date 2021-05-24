@@ -21,5 +21,7 @@
     <Folder Include="DTOs\Product\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 </Project>

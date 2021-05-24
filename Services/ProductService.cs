@@ -6,6 +6,7 @@ using dotnet_hero.Data;
 using dotnet_hero.DTOs.Product;
 using dotnet_hero.Entities;
 using dotnet_hero.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_hero.Services
@@ -14,10 +15,12 @@ namespace dotnet_hero.Services
     {
 
         private readonly DatabaseContext databaseContext;
+        private readonly IUploadFileService uploadFileService;
 
-        public ProductService(DatabaseContext databaseContext)
+        public ProductService(DatabaseContext databaseContext, IUploadFileService uploadFileService)
         {
             this.databaseContext = databaseContext;
+            this.uploadFileService = uploadFileService;
         }
 
 
@@ -61,6 +64,19 @@ namespace dotnet_hero.Services
             await databaseContext.SaveChangesAsync();
         }
 
-
+        public async Task<(string errorMessage, string imageName)> UploadImage(List<IFormFile> formFiles)
+        {
+            string errorMessage = string.Empty;
+            string imageName = string.Empty;
+            if (uploadFileService.IsUpload(formFiles))
+            {
+                errorMessage = uploadFileService.Validation(formFiles);
+                if (string.IsNullOrEmpty(errorMessage))
+                {
+                    imageName = (await uploadFileService.UploadImages(formFiles))[0];
+                }
+            }
+            return (errorMessage, imageName);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using dotnet_hero.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace dotnet_hero.Interfaces
 {
@@ -14,5 +15,6 @@ namespace dotnet_hero.Interfaces
         Task Delete(Product product);
 
         Task<IEnumerable<Product>> Search(string name);
+        Task<(string errorMessage, string imageName)> UploadImage(List<IFormFile> formFiles);
     }
 }
