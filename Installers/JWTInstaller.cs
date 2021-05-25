@@ -25,9 +25,9 @@ namespace dotnet_hero.Installers
                 {
                     opt.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ValidateIssuer = false,//true
+                        ValidateIssuer = true,
                         ValidIssuer = jwtSettings.Issuer,
-                        ValidateAudience = false,//true
+                        ValidateAudience = true,
                         ValidAudience = jwtSettings.Audience,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,

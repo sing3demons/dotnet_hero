@@ -103,8 +103,8 @@ namespace dotnet_hero.Services
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                //issuer: jwtSettings.Issuer,
-                //audience: jwtSettings.Audience,
+                issuer: jwtSettings.Issuer,
+                audience: jwtSettings.Audience,
                 claims: claims,
                 expires: expires,
                 signingCredentials: creds);
