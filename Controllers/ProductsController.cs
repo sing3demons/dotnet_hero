@@ -8,6 +8,7 @@ using dotnet_hero.DTOs.Product;
 using dotnet_hero.Entities;
 using dotnet_hero.Interfaces;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -58,6 +59,7 @@ namespace dotnet_hero.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize(Roles = "Admin, Cashier")]
         public async Task<ActionResult> AddProduct([FromForm] ProductRequest productRequest)
         {
             (string errorMessage, string imageName) = await productService.UploadImage(productRequest.FormFile);
@@ -84,6 +86,7 @@ namespace dotnet_hero.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, Cashier")]
         public async Task<ActionResult> UpdateProduct(int id, [FromForm] ProductRequest productRequest)
         {
 
@@ -114,6 +117,7 @@ namespace dotnet_hero.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Cashier")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             //var result = databaseContext.Products.Find(id);

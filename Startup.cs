@@ -52,7 +52,9 @@ namespace dotnet_hero
             app.UseRouting();
 
             app.UseCors("AllowAllOrigins");
-            //app.UseCors("AllowSpecificOrigins"); 
+            //app.UseCors("AllowSpecificOrigins");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dotnet_hero.Data;
-using dotnet_hero.DTOs.Product;
 using dotnet_hero.Entities;
 using dotnet_hero.Interfaces;
 using Microsoft.AspNetCore.Http;
