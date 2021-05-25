@@ -22,10 +22,7 @@ namespace dotnet_hero.Controllers
 
         private readonly IProductService productService;
 
-        public ProductsController(IProductService productService)
-        {
-            this.productService = productService;
-        }
+        public ProductsController(IProductService productService) => this.productService = productService;
 
 
         // GET: api/values

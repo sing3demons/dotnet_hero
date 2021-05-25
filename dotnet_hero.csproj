@@ -24,5 +24,6 @@
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\Images\" />
     <Folder Include="Installers\" />
+    <Folder Include="DTOs\Account\" />
   </ItemGroup>
 </Project>
